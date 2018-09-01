@@ -99,6 +99,8 @@ def handle_message(event):
             if x < 20:
                 for i in range(x):
                     line_bot_api.push_message(gid, TextSendMessage(separate[2]))
+            else:
+                line_bot_api.push_message(gid, TextSendMessage(text="ไม่่สามารถสแปมมากกว่า 20 ข้อความ"))
         except:
             pass
     if text == "/group":
