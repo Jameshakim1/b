@@ -121,11 +121,10 @@ def handle_message(event):
             separate = text.split(" ")
             country = text.replace(separate[0] + " ","")
             if(country == None):country == "th"
-            country = "th"
             user_agent = {'User-agent': 'Mozilla/5.0'}
             url = requests.get("https://newsapi.org/v2/top-headlines?country={}&apiKey=763b6fc67a594a4e9e0f9d29303f83dd".format(country))
             data = url.json()
-            result="ข่าวใหม่ ( " + country + " )"
+            result="ข่าวใหม่ ( " + country.upper() + " )"
             for anu in data["articles"]:
                 if len(result) > 500:
                     line_bot_api.reply_message(event.reply_token, TextSendMessage(text=result))
