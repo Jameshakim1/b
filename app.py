@@ -84,6 +84,15 @@ def handle_message(event):
     sender = event.source.user_id #get user_id
     gid = event.source.sender_id #get group_id
 #=====[ LEAVE GROUP OR ROOM ]==========[ ARSYBAI ]======================
+    if text.isdigit():
+        x = int(text) + 1
+        line_bot_api.reply_message(event.reply_token, TextSendMessage(text=x))
+    if "/spam" in text:
+        separate = text.split(" ")
+        search = text.replace(separate[0] + " ","")
+        x = int(search)
+        for i in range(x):
+            line_bot_api.push_message(gid, TextSendMessage(text="by pasunx"))
     if "/yt" in text:
         separate = text.split(" ")
         search = text.replace(separate[0] + " ","")
