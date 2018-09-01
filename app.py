@@ -163,6 +163,11 @@ def handle_message(event):
                 except Exception as error:
                     line_bot_api.reply_message(event.reply_token, TextSendMessage(text=error))
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=trs))
+    if text.startswith("/broadcast"):
+        separate = text.split(" ")
+        textt = text.replace(separate[0] + " ","")
+        if(event.source.user_id == "Udaa0a2f396dd41e4398b106d903d92fd"):
+            line_bot_api.multicast(event.source.user_id, TextSendMessage(text="[ ประกาศ ]\n" + textt))
     if text == "/bye":
         if(event.source.user_id == "Udaa0a2f396dd41e4398b106d903d92fd"):
             confirm_template_message = TemplateSendMessage(
@@ -219,90 +224,7 @@ def handle_message(event):
                 ]
             )
         )
-        line_bot_api.reply_message(event.reply_token, buttons_template_message)
-        bubble = BubbleContainer(
-            direction='ltr',
-            hero=ImageComponent(
-                url='http://images4.fanpop.com/image/photos/15800000/Animes-anime-cuties-15887436-1400-875.jpg',
-                size='full',
-                aspect_ratio='20:13',
-                aspect_mode='cover',
-                action=URIAction(uri='http://line.me/ti/p/~esci_', label='@')
-            ),
-            body=BoxComponent(
-                layout='vertical',
-                contents=[
-                    # title
-                    TextComponent(text='PASUNx', weight='bold', size='xl'),
-                    # review
-                    # info
-                    BoxComponent(
-                        layout='vertical',
-                        margin='lg',
-                        spacing='sm',
-                        contents=[
-                            BoxComponent(
-                                layout='baseline',
-                                spacing='sm',
-                                contents=[
-                                    TextComponent(
-                                        text='สถานที่',
-                                        color='#aaaaaa',
-                                        size='sm',
-                                        flex=1
-                                    ),
-                                    TextComponent(
-                                        text='Bangkok, Thailand',
-                                        wrap=True,
-                                        color='#666666',
-                                        size='sm',
-                                        flex=5
-                                    )
-                                ],
-                            ),
-                            BoxComponent(
-                                layout='baseline',
-                                spacing='sm',
-                                contents=[
-                                    TextComponent(
-                                        text='เวลา',
-                                        color='#aaaaaa',
-                                        size='sm',
-                                        flex=1
-                                    ),
-                                    TextComponent(
-                                        text="00:00 - 23:59",
-                                        wrap=True,
-                                        color='#666666',
-                                        size='sm',
-                                        flex=5,
-                                    ),
-                                ],
-                            ),
-                        ],
-                    )
-                ],
-            ),
-            footer=BoxComponent(
-                layout='vertical',
-                spacing='sm',
-                contents=[
-                    # separator
-                    SeparatorComponent(),
-                    # websiteAction
-                    ButtonComponent(
-                        style='link',
-                        height='sm',
-                        action=URIAction(label='contact', uri="https://line.me/ti/p/~esci_")
-                    )
-                ]
-            ),
-        )
-        #message = FlexSendMessage(alt_text="God message", contents=bubble)
-        #line_bot_api.reply_message(
-        #    event.reply_token,
-        #    buttons_template_message
-        #)
+        line_bot_api.push_message(gid, buttons_template_message)
     if '/wiki ' in text:
         try:
             wiki = text.replace("/wiki ","")
