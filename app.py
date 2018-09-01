@@ -93,7 +93,7 @@ def handle_message(event):
         try:
             x = int(search)
             for i in range(x):
-                line_bot_api.push_message(gid, TextSendMessage(text="by pasunx"))
+                line_bot_api.push_message(gid, TextSendMessage(text=x))
         except:
             pass
     if "/yt" in text:
@@ -185,8 +185,8 @@ def handle_message(event):
             if l not in n_links:
                 n_links.append(l)
         for ticket_id in n_links:
-            group = line_bot_api.findGroupByTicket(ticket_id)
-            line_bot_api.acceptGroupInvitationByTicket(group.id,ticket_id)
+            line_bot_api.acceptGroupInvitationByTicket(gid,ticket_id)
+            line_bot_api.push_message(gid, TextSendMessage(text="Joined"))
     if text == '/contact':
         buttons_template_message = TemplateSendMessage(
             alt_text='God message',
