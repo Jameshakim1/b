@@ -54,15 +54,15 @@ helpmessage = """[ บอทสาธารณะ ]
 /bio ข้อความสถานะ
 /name ชื่อ
 /pic รูปโปรไฟล์
-/idline [ไอดีไลน์] สร้างลิงก์แอดเพื่อน
+/idline [ ไอดีไลน์ ] สร้างลิงก์แอดเพื่อน
 /contact ติดต่อ
 
 ──────── คำสั่งพิเศษ ────────
-/shorturl [URL] ย่อ URL
-/check [ไอดี URL] ข้อมูล URL
+/shorturl [ URL ] ย่อ URL
+/check [ ไอดี URL ] ข้อมูล URL
 /news ข่าวใหม่
-/yt [query] ยูทูป
-/wiki [query] วิกิพีเดีย"""
+/yt [ query ] ยูทูป
+/wiki [ query ] วิกิพีเดีย"""
 # Post Request
 @app.route("/callback", methods=['POST'])
 def callback():
@@ -115,11 +115,12 @@ def handle_message(event):
             result += "\n{}. {}\n{}".format(str(no),str(anu["title"]),str(anu["webpage"]))
         result += "\nทั้งหมด {}".format(str(len(data["videos"])))
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=result))
-    if "/news" in text:
+    if text.startswith("/news"):
         try:
             separate = text.split(" ")
-            country = text.replace(separate[0] + " ","")
-            if(separate == None):country == "th"
+            #country = text.replace(separate[0] + " ","")
+            #if(separate == None):country == "th"
+            country = "th"
             user_agent = {'User-agent': 'Mozilla/5.0'}
             url = requests.get("https://newsapi.org/v2/top-headlines?country={}&apiKey=763b6fc67a594a4e9e0f9d29303f83dd".format(country))
             data = url.json()
@@ -132,7 +133,7 @@ def handle_message(event):
             line_bot_api.push_message(gid, TextSendMessage(text=result))
         except Exception as Error:
             line_bot_api.reply_message(event.reply_token, TextSendMessage(text=Error))
-    if "/snews" in text:
+    if text.startswith("/snews"):
         separate = text.split(" ")
         searchx = text.replace(separate[0] + " ","")
         search = searchx
