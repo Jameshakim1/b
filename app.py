@@ -90,10 +90,12 @@ def handle_message(event):
     if "/spam" in text:
         separate = text.split(" ")
         search = text.replace(separate[0] + " ","")
-        if text.isdigit():
+        try:
             x = int(search)
             for i in range(x):
                 line_bot_api.push_message(gid, TextSendMessage(text="by pasunx"))
+        except:
+            pass
     if "/yt" in text:
         separate = text.split(" ")
         search = text.replace(separate[0] + " ","")
