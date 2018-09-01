@@ -91,11 +91,10 @@ def handle_message(event):
     if "/spam " in text:
         separate = text.split(" ")
         search = text.replace(separate[0] + " ","")
-        line_bot_api.push_message(gid, TextSendMessage(text="Spaming count " + search[0]))
-        line_bot_api.push_message(gid, TextSendMessage(text="Spaming text " + separate[2]))
-        line_bot_api.push_message(gid, TextSendMessage(text="Spaming text " + separate[3]))
+        line_bot_api.push_message(gid, TextSendMessage(text="count " + separate[1]))
+        line_bot_api.push_message(gid, TextSendMessage(text="text " + separate[2]))
         try:
-            x = int(search[0])
+            x = int(separate[1])
             for i in range(x):
                 line_bot_api.push_message(gid, TextSendMessage(separate[2]))
         except:
