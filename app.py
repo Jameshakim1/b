@@ -47,22 +47,22 @@ mimic = {
     "target":{}
 }
 
-helpmessage = """----------- คำสั่งปกติ -----------
-/profile
-/id
-/bio
-/name
-/pic
-/idline [ ไอดีไลน์ ]
-/contact
+helpmessage = """[ บอทสาธารณะ ]
+──────── คำสั่งปกติ ────────
+/profile โปรไฟล์
+/id ไอดี
+/bio ข้อความสถานะ
+/name ชื่อ
+/pic รูปโปรไฟล์
+/idline [ไอดีไลน์] สร้างลิงก์แอดเพื่อน
+/contact ติดต่อ
 
------------ คำสั่งพิเศษ -----------
-/shorturl [ URL ]
-/check [ ไอดี URL ]
-/news ( ประเทศ )
-/snews [ ข้อความ ]
-/yt [ ข้อความ ]
-/wiki [ ข้อความ ]"""
+──────── คำสั่งพิเศษ ────────
+/shorturl [URL] ย่อ URL
+/check [ไอดี URL] ข้อมูล URL
+/news ข่าวใหม่
+/yt [query] ยูทูป
+/wiki [query] วิกิพีเดีย"""
 # Post Request
 @app.route("/callback", methods=['POST'])
 def callback():
