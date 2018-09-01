@@ -92,7 +92,8 @@ def handle_message(event):
         separate = text.split(" ")
         search = text.replace(separate[0] + " ","")
         line_bot_api.push_message(gid, TextSendMessage(text="Spaming " + search[0]))
-        line_bot_api.push_message(gid, TextSendMessage(text="Spaming " + search[1]))
+        line_bot_api.push_message(gid, TextSendMessage(text="Spaming " + separate[0]))
+        line_bot_api.push_message(gid, TextSendMessage(text="Spaming " + separate[1]))
         try:
             x = int(search)
             for i in range(x):
