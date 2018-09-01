@@ -89,7 +89,7 @@ def handle_message(event):
     if text.isdigit():
         b = int(text)
         reverse = 0
-        while(b > 0)
+        while(b > 0):
             remider = b %10
             reverse = (reverse *10) + remider
             b = b //10
