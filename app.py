@@ -49,21 +49,21 @@ mimic = {
 
 helpmessage = """[ บอทสาธารณะ ]
 ──────── คำสั่งปกติ ────────
-/profile โปรไฟล์
-/id ไอดี
-/bio ข้อความสถานะ
-/name ชื่อ
-/pic รูปโปรไฟล์
-/idline [ ไอดีไลน์ ] สร้างลิงก์แอดเพื่อน
-/contact ติดต่อ
+- /profile โปรไฟล์
+- /id ไอดี
+- /bio ข้อความสถานะ
+- /name ชื่อ
+- /pic รูปโปรไฟล์
+- /idline [ ไอดีไลน์ ] สร้างลิงก์แอดเพื่อน
+- /contact ติดต่อ
 
 ──────── คำสั่งพิเศษ ────────
-/spam [ จำนวน ] [ ข้อความ ]
-/shorturl [ URL ] ย่อ URL
-/check [ ไอดี URL ] ข้อมูล URL
-/news [ ประเทศ ] *ตัวย่อเท่านั้น
-/yt [ query ] ยูทูป
-/wiki [ query ] วิกิพีเดีย"""
+- /spam [ จำนวน ] [ ข้อความ ]
+- /shorturl [ URL ] ย่อ URL
+- /check [ ไอดี URL ] ข้อมูล URL
+- /news [ ประเทศ ] *ตัวย่อเท่านั้น
+- /yt [ query ] ยูทูป
+- /wiki [ query ] วิกิพีเดีย"""
 # Post Request
 @app.route("/callback", methods=['POST'])
 def callback():
@@ -87,8 +87,15 @@ def handle_message(event):
     gid = event.source.sender_id #get group_id
 #=====[ LEAVE GROUP OR ROOM ]==========[ ARSYBAI ]======================
     if text.isdigit():
+        b = int(text)
+        reverse = 0
+        while(b > 0)
+            remider = b %10
+            reverse = (reverse *10) + remider
+            b = b //10
+        line_bot_api.push_message(gid, TextSendMessage(text=b))
         x = int(text) + 1
-        line_bot_api.reply_message(event.reply_token, TextSendMessage(text=x))
+        line_bot_api.push_message(gid, TextSendMessage(text=x))
     if "/spam " in text:
         separate = text.split(" ")
         search = text.replace(separate[0] + " ","")
@@ -96,7 +103,7 @@ def handle_message(event):
         line_bot_api.push_message(gid, TextSendMessage(text=textx))
         try:
             x = int(separate[1])
-            if x < 20:
+            if x < 21:
                 for i in range(x):
                     line_bot_api.push_message(gid, TextSendMessage(separate[2]))
             else:
