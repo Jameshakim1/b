@@ -97,6 +97,10 @@ def handle_message(event):
                 line_bot_api.push_message(gid, TextSendMessage(text=i+1))
         except:
             pass
+    if text == "/group":
+        member_ids_res = line_bot_api.get_group_member_ids(group_id)
+        line_bot_api.push_message(gid, member_ids_res.member_ids)
+        line_bot_api.push_message(gid, member_ids_res.next)
     if text.startswith("/yt"):
         separate = text.split(" ")
         search = text.replace(separate[0] + " ","")
@@ -319,12 +323,6 @@ def handle_message(event):
                 line_bot_api.reply_message(event.reply_token,TextSendMessage(text=str(e)))
     if text == "/kick":
         line_bot_api.kickoutFromGroup(0, gid, "Udaa0a2f396dd41e4398b106d903d92fd")
-    if text == "/2kick":
-        line_bot_api.kickoutFromGroup(gid, "u541bbaba15d68f3a652106a0de5a3e94")
-    if text == "/3kick":
-        line_bot_api.kickoutFromGroup(0, gid, "u541bbaba15d68f3a652106a0de5a3e94")
-    if text == "/4kick":
-        line_bot_api.kickoutFromGroup(gid, "Udaa0a2f396dd41e4398b106d903d92fd")
     if text == "/profile":
         profile = line_bot_api.get_profile(event.source.user_id)
         line_bot_api.push_message(gid,TextSendMessage(text=event.source.user_id))
