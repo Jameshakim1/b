@@ -88,14 +88,14 @@ def handle_message(event):
     if text.isdigit():
         x = int(text) + 1
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=x))
-    if "/spam" in text:
+    if "/spam " in text:
         separate = text.split(" ")
+        line_bot_api.push_message(gid, TextSendMessage(text="Spaming " + separate))
         search = text.replace(separate[0] + " ","")
         try:
-            line_bot_api.push_message(gid, TextSendMessage(text=separate))
             x = int(separate)
             for i in range(x):
-                line_bot_api.push_message(gid, TextSendMessage(text=search))
+                line_bot_api.push_message(gid, TextSendMessage(text=i+1))
         except:
             pass
     if text == "/group":
