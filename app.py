@@ -97,7 +97,7 @@ def handle_message(event):
                 line_bot_api.push_message(gid, TextSendMessage(text=x))
         except:
             pass
-    if "/yt" in text:
+    if text.startswith("/yt"):
         separate = text.split(" ")
         search = text.replace(separate[0] + " ","")
         url = requests.get("http://api.w3hills.com/youtube/search?keyword={}&api_key=86A7FCF3-6CAF-DEB9-E214-B74BDB835B5B".format(search))
@@ -375,12 +375,12 @@ def handle_message(event):
         sasa = "http://line.me/R/ti/p/~" + skss
         text_message = TextSendMessage(text=sasa)
         line_bot_api.reply_message(event.reply_token, text_message)
-    elif '/check' in text:
+    elif text.startswith('/check'):
         originURLx = text.split(" ")
         originURL = text.replace(originURLx[0] + " ","")
         result = requests.get("http://shorturlbyzefyrinusx.000webhostapp.com/api/check.php?id=" + originURL + "&type=api").text
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=result))
-    elif '/shorturl' in text:
+    elif text.startswith('/shorturl'):
         originURLx = text.split(" ")
         originURL = text.replace(originURLx[0] + " ","")
         result = requests.get("http://shorturlbyzefyrinusx.000webhostapp.com/api/urlshorten.php?url=" + originURL).text
