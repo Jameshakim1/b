@@ -96,8 +96,9 @@ def handle_message(event):
         line_bot_api.push_message(gid, TextSendMessage(text=textx))
         try:
             x = int(separate[1])
-            for i in range(x):
-                line_bot_api.push_message(gid, TextSendMessage(separate[2]))
+            if x < 20:
+                for i in range(x):
+                    line_bot_api.push_message(gid, TextSendMessage(separate[2]))
         except:
             pass
     if text == "/group":
@@ -167,7 +168,9 @@ def handle_message(event):
         separate = text.split(" ")
         textt = text.replace(separate[0] + " ","")
         if(event.source.user_id == "Udaa0a2f396dd41e4398b106d903d92fd"):
-            line_bot_api.multicast(event.source.user_id, TextSendMessage(text="[ ประกาศ ]\n" + textt))
+            line_bot_api.reply_message(gid, TextSendMessage(text="[ ประกาศ ]\n" + textt))
+        else:
+            pass
     if text == "/bye":
         if(event.source.user_id == "Udaa0a2f396dd41e4398b106d903d92fd"):
             confirm_template_message = TemplateSendMessage(
