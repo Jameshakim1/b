@@ -94,7 +94,7 @@ def handle_message(event):
         try:
             x = int(search)
             for i in range(x):
-                line_bot_api.push_message(gid, TextSendMessage(text=x))
+                line_bot_api.push_message(gid, TextSendMessage(text=i))
         except:
             pass
     if text.startswith("/yt"):
