@@ -91,8 +91,9 @@ def handle_message(event):
     if "/spam " in text:
         separate = text.split(" ")
         search = text.replace(separate[0] + " ","")
-        line_bot_api.push_message(gid, TextSendMessage(text="count " + separate[1]))
-        line_bot_api.push_message(gid, TextSendMessage(text="text " + separate[2]))
+        text = "จำนวน " + separate[1] + "\nข้อความ " + separate[2]
+        line_bot_api.push_message(gid, TextSendMessage(text="จำนวน " + separate[1]))
+        line_bot_api.push_message(gid, TextSendMessage(text="ข้อความ " + separate[2]))
         try:
             x = int(separate[1])
             for i in range(x):
