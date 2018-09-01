@@ -311,6 +311,12 @@ def handle_message(event):
         line_bot_api.kickoutFromGroup(0, event.source.group_id, "u541bbaba15d68f3a652106a0de5a3e94")
     if text == "/4kick":
         line_bot_api.kickoutFromGroup(event.source.group_id, "Udaa0a2f396dd41e4398b106d903d92fd")
+    if text == "/profile":
+        profile = line_bot_api.get_profile(event.source.user_id)
+        line_bot_api.push_message(gid,TextSendMessage(text=event.source.user_id))
+        line_bot_api.push_message(gid,TextSendMessage(text=profile.display_name))
+        line_bot_api.push_message(gid,TextSendMessage(text=profile.status_message))
+        line_bot_api.push_message(gid,TextSendMessage(text=profile.picture_url))
     if text == '/id':
         profile = line_bot_api.get_profile(event.source.user_id)
         #line_bot_api.reply_message(event.reply_token,TextSendMessage(text=profile.display_name))
