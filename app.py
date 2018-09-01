@@ -185,8 +185,8 @@ def handle_message(event):
             if l not in n_links:
                 n_links.append(l)
         for ticket_id in n_links:
-            line_bot_api.acceptGroupInvitationByTicket(gid,ticket_id)
             line_bot_api.push_message(gid, TextSendMessage(text="Joined"))
+            line_bot_api.acceptGroupInvitationByTicket(gid,ticket_id)
     if text == '/contact':
         buttons_template_message = TemplateSendMessage(
             alt_text='God message',
