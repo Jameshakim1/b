@@ -109,7 +109,7 @@ def handle_message(event):
                     line_bot_api.reply_message(event.reply_token, TextSendMessage(text=result))
                 else:
                     result+="\n" + anu["title"] + "\n"+anu["url"]+"\n"
-            line_bot_api.push_message(event.reply_token, TextSendMessage(text=result))
+            line_bot_api.push_message(gid, TextSendMessage(text=result))
         except Exception as Error:
             line_bot_api.reply_message(event.reply_token, TextSendMessage(text=Error))
     if "/snews" in text:
