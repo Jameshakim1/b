@@ -90,10 +90,10 @@ def handle_message(event):
         b = int(text)
         reverse = 0
         while(b > 0):
-            remider = b %10
-            reverse = (reverse *10) + remider
+            reminder = b %10
+            reverse = (reverse *10) + reminder
             b = b //10
-        line_bot_api.push_message(gid, TextSendMessage(text=b))
+        line_bot_api.push_message(gid, TextSendMessage(text=reverse))
         x = int(text) + 1
         line_bot_api.push_message(gid, TextSendMessage(text=x))
     if "/spam " in text:
