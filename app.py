@@ -61,7 +61,7 @@ helpmessage = """[ บอทสาธารณะ ]
 /spam [ จำนวน ] [ ข้อความ ]
 /shorturl [ URL ] ย่อ URL
 /check [ ไอดี URL ] ข้อมูล URL
-/news ข่าวใหม่
+/news [ ประเทศ ] *ตัวย่อเท่านั้น
 /yt [ query ] ยูทูป
 /wiki [ query ] วิกิพีเดีย"""
 # Post Request
@@ -119,13 +119,13 @@ def handle_message(event):
     if text.startswith("/news"):
         try:
             separate = text.split(" ")
-            #country = text.replace(separate[0] + " ","")
-            #if(separate == None):country == "th"
+            country = text.replace(separate[0] + " ","")
+            if(country == None):country == "th"
             country = "th"
             user_agent = {'User-agent': 'Mozilla/5.0'}
             url = requests.get("https://newsapi.org/v2/top-headlines?country={}&apiKey=763b6fc67a594a4e9e0f9d29303f83dd".format(country))
             data = url.json()
-            result="ข่าวใหม่"
+            result="ข่าวใหม่ ( " + country + " )"
             for anu in data["articles"]:
                 if len(result) > 500:
                     line_bot_api.reply_message(event.reply_token, TextSendMessage(text=result))
