@@ -47,6 +47,7 @@ mimic = {
 }
 
 helpmessage = """----------- คำสั่งปกติ -----------
+/profile
 /id
 /bio
 /name
