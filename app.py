@@ -92,9 +92,9 @@ def handle_message(event):
         separate = text.split(" ")
         search = text.replace(separate[0] + " ","")
         try:
-            x = int(search)
+            x = int(separate)
             for i in range(x):
-                line_bot_api.push_message(gid, TextSendMessage(text=i+1))
+                line_bot_api.push_message(gid, TextSendMessage(text=search))
         except:
             pass
     if text == "/group":
