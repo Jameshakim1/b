@@ -58,6 +58,7 @@ helpmessage = """[ บอทสาธารณะ ]
 /contact ติดต่อ
 
 ──────── คำสั่งพิเศษ ────────
+/spam [ จำนวน ] [ ข้อความ ]
 /shorturl [ URL ] ย่อ URL
 /check [ ไอดี URL ] ข้อมูล URL
 /news ข่าวใหม่
@@ -91,9 +92,8 @@ def handle_message(event):
     if "/spam " in text:
         separate = text.split(" ")
         search = text.replace(separate[0] + " ","")
-        text = "จำนวน " + separate[1] + "\nข้อความ " + separate[2]
-        line_bot_api.push_message(gid, TextSendMessage(text="จำนวน " + separate[1]))
-        line_bot_api.push_message(gid, TextSendMessage(text="ข้อความ " + separate[2]))
+        textx = "จำนวน " + separate[1] + "\nข้อความ " + separate[2]
+        line_bot_api.push_message(gid, TextSendMessage(text=textx))
         try:
             x = int(separate[1])
             for i in range(x):
