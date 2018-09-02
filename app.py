@@ -310,7 +310,7 @@ def handle_message(event):
         url = requests.get("http://api.w3hills.com/youtube/search?keyword={}&api_key=86A7FCF3-6CAF-DEB9-E214-B74BDB835B5B".format(search))
         data = url.json()
         no = 0
-        result = "ค้นหา ยูทูป" + "\n──────────────"
+        result = "ยูทูป ( ค้นหา " + search + " )\n──────────────"
         for anu in data["videos"]:
             no += 1
             result += "\n{}. {}\n{}\n".format(str(no),str(anu["title"]),str(anu["webpage"]))
