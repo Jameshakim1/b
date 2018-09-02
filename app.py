@@ -128,7 +128,7 @@ def handle_message(event):
         separate = text.split(" ")
         try:
             m = int(text.replace(separate[0] + " ",""))
-            txt = "สูตรคูณแม่ " + m
+            txt = "สูตรคูณแม่ " + str(m)
             for i in range(m):
 	            x = i+1
 	            txt+="\n" + str(m) + " * " + str(x) + " > " + str(m * x)
