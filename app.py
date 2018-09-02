@@ -150,7 +150,7 @@ def handle_message(event):
         #line_bot_api.push_message(gid, TextSendMessage(text=reverse))
         x = int(text) + 1
         line_bot_api.push_message(gid, TextSendMessage(text=x))
-    if text.startswith("/graph"):
+    """if text.startswith("/graph"):
         try:
             headers = {"Authorization": "Bearer ya29.GlsMBisE2cNscXj8RW1UP32SVEkIOJ8z1rx4oE2tQGRXxomt1t6rxoM9L11EH3pm5mKK3uIlxfytEuwN3y-4uM0eoMsFo8BjpQglayMH1E-0y5tNW0wwr4MP2nc4"}
             x = [1,2,3]
@@ -177,7 +177,7 @@ def handle_message(event):
             txt = "https://drive.google.com/file/d/" + t["id"] + "/view"
             line_bot_api.push_message(gid, TextSendMessage(text=txt))
         except Exception as Err:
-            line_bot_api.push_message(gid, TextSendMessage(text=Err))
+            line_bot_api.push_message(gid, TextSendMessage(text=Err))"""
     if text.startswith("/divide"):
         separate = text.split(" ")
         try:
