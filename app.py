@@ -66,7 +66,7 @@ helpmessage = """[ บอทสาธารณะ ] เวอร์ชั่น 
 - /wiki [ query ] วิกิพีเดีย"""
 
 groupcast = {}
-groupcastt = ""
+groupcastt = "[ ONLINE ]"
 
 # Post Request
 @app.route("/callback", methods=['POST'])
@@ -89,15 +89,15 @@ def handle_message(event):
     text = event.message.text #simplify for receove message
     sender = event.source.user_id #get user_id
     gid = event.source.sender_id #get group_id
-    if text.startswith("/broadcast"):
-        separate = text.split(" ")
-        textt = text.replace(separate[0] + " ","")
-        if(event.source.user_id == "Udaa0a2f396dd41e4398b106d903d92fd"):
-            line_bot_api.reply_message(gid, TextSendMessage(text="ตั้งข้อความประกาศว่า " + textt))
-            groupcastt = textt
-            groupcast = {}
-        else:
-            pass
+    #if text.startswith("/broadcast"):
+    #    separate = text.split(" ")
+    #    textt = text.replace(separate[0] + " ","")
+    #    if(event.source.user_id == "Udaa0a2f396dd41e4398b106d903d92fd"):
+    #        line_bot_api.reply_message(gid, TextSendMessage(text="ตั้งข้อความประกาศว่า " + textt))
+    #        groupcastt = textt
+    #        groupcast = {}
+    #    else:
+    #        pass
     try:
         if groupcastt != "":
             if groupcast[gid] == True:
