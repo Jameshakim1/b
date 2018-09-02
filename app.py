@@ -138,8 +138,9 @@ def handle_message(event):
                     if search == code[gid]:
                         line_bot_api.push_message(gid, TextSendMessage(text="ยืนยันสำเร็จ"))
                         veri[gid] = True
+                    else:
+                        line_bot_api.push_message(gid, TextSendMessage(text="โค้ดยืนยันไม่ถูกต้อง"))
                 except:
-                    line_bot_api.push_message(gid, TextSendMessage(text="โค้ดยืนยันไม่ถูกต้อง"))
                     return
         except:
             veri[gid] = False
