@@ -208,12 +208,15 @@ def handle_message(event):
         i = ac["visibility"]
         j = ad["sunrise"]
         k = ad["sunset"]
+        o = str((int(c) - 32)/1.8)
+        o = t[:t.index('.')]
         txt = "สภาพอากาศ กรุงเทพมหานคร" +"\n──────────────\n"
+        txt+="อุณหถูมิ " + o " ℃"
         txt+="ลม\nความเย็น " + c
         txt+="\nทิศทาง " + d
-        txt+="\nความเร็ว " + e
+        txt+="\nความเร็ว " + e + " mph"
         txt+="\n\nบรรยากาศ\nความชื้น " + f
-        txt+="\nความดัน " + g
+        txt+="\nความดัน " + g + " in"
         txt+="\nที่เพิ่มสูงขึ้น " + h
         txt+="\nความชัดเจน " + i
         txt+="\n\nพระอาทิตย์ขึ้น " + j
