@@ -150,7 +150,7 @@ def handle_message(event):
         try:
             m = int(text.replace(separate[0] + " ",""))
             txt = "สแควรูท " + str(m) + "\n──────────────"
-            txt+=math.sqrt(m)
+            txt+=str(math.sqrt(m))
             line_bot_api.push_message(gid, TextSendMessage(text=txt))
         except:
             line_bot_api.push_message(gid, TextSendMessage(text="เฉพาะตัวเลขเท่านั้น"))
