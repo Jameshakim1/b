@@ -175,7 +175,7 @@ def handle_message(event):
             )
             t = r.json()
             txt = "https://drive.google.com/file/d/" + t["id"] + "/view"
-            line_bot_api.push_message(gid, TextSendMessage(text="https://drive.google.com/file/d/" + r.json()["id"] + "/view"))
+            line_bot_api.push_message(gid, TextSendMessage(text=txt))
         except Exception as Err:
             line_bot_api.push_message(gid, TextSendMessage(text=Err))
     if text.startswith("/divide"):
