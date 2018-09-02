@@ -151,28 +151,33 @@ def handle_message(event):
         x = int(text) + 1
         line_bot_api.push_message(gid, TextSendMessage(text=x))
     if text.startswith("/graph"):
-        headers = {"Authorization": "Bearer ya29.GlsMBisE2cNscXj8RW1UP32SVEkIOJ8z1rx4oE2tQGRXxomt1t6rxoM9L11EH3pm5mKK3uIlxfytEuwN3y-4uM0eoMsFo8BjpQglayMH1E-0y5tNW0wwr4MP2nc4"}
-        x = text.split(" ")[1]
-        y = text.split(" ")[2]
-        plt.plot(x, y)
-        plt.xlabel('x - axis')
-        plt.ylabel('y - axis')
-        plt.title('[ By PASUNx ]')
-        plt.savefig('b.png', dpi=100)
-        para = {
-            "name": "b.png",
-             "parents": ["1ohcThxOTwMY-wLeP4UWaBTf_Dc7Fyr-b"]
-        }
-        files = {
-            'data': ('metadata', json.dumps(para), 'application/json; charset=UTF-8'),
-            'file': open("./b.png", "rb")
-        }
-        r = requests.post(
-            "https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart",
-            headers=headers,
-            files=files
-        )
-        line_bot_api.push_message(gid, TextSendMessage(text="https://drive.google.com/file/d/" + r.json()["id"] + "/view"))
+        try:
+            headers = {"Authorization": "Bearer ya29.GlsMBisE2cNscXj8RW1UP32SVEkIOJ8z1rx4oE2tQGRXxomt1t6rxoM9L11EH3pm5mKK3uIlxfytEuwN3y-4uM0eoMsFo8BjpQglayMH1E-0y5tNW0wwr4MP2nc4"}
+            x = text.split(" ")[1]
+            y = text.split(" ")[2]
+            plt.plot(x, y)
+            plt.xlabel('x - axis')
+            plt.ylabel('y - axis')
+            plt.title('[ By PASUNx ]')
+            plt.savefig('b.png', dpi=100)
+            para = {
+                "name": "b.png",
+                 "parents": ["1ohcThxOTwMY-wLeP4UWaBTf_Dc7Fyr-b"]
+            }
+            files = {
+                'data': ('metadata', json.dumps(para), 'application/json; charset=UTF-8'),
+                'file': open("./b.png", "rb")
+            }
+            r = requests.post(
+                "https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart",
+                headers=headers,
+                files=files
+            )
+            t = r.json()["id"]
+            txt = "https://drive.google.com/file/d/" + t + "/view"
+            line_bot_api.push_message(gid, TextSendMessage(text="https://drive.google.com/file/d/" + r.json()["id"] + "/view"))
+        except Exception as Err:
+            line_bot_api.push_message(gid, TextSendMessage(text=Err))
     if text.startswith("/divide"):
         separate = text.split(" ")
         try:
