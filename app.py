@@ -48,7 +48,7 @@ mimic = {
 }
 
 helpmessage = """[ บอทสาธารณะ ] เวอร์ชั่น 0.1.2
-──────── คำสั่งปกติ ────────
+─────── คำสั่งปกติ ───────
 - /profile โปรไฟล์
 - /id ไอดี
 - /bio ข้อความสถานะ
@@ -57,13 +57,17 @@ helpmessage = """[ บอทสาธารณะ ] เวอร์ชั่น 
 - /idline [ ไอดีไลน์ ] สร้างลิงก์แอดเพื่อน
 - /contact ติดต่อ
 
-──────── คำสั่งพิเศษ ────────
+─────── คำสั่งพิเศษ ───────
 - /spam [ จำนวน ] [ ข้อความ ]
 - /shorturl [ URL ] ย่อ URL
 - /check [ ไอดี URL ] ข้อมูล URL
 - /news [ ประเทศ ] *ตัวย่อเท่านั้น
 - /yt [ query ] ยูทูป
-- /wiki [ query ] วิกิพีเดีย"""
+- /wiki [ query ] วิกิพีเดีย
+- /mtp [ ตัวเลข ] สูตรคูณ
+
+─────── คำสั่งใหม่ ───────
+- /mtp [ ตัวเลข ] สูตรคูณ"""
 
 groupcast = {1:False}
 groupcastt = "[ ONLINE ]"
@@ -120,6 +124,17 @@ def handle_message(event):
         #line_bot_api.push_message(gid, TextSendMessage(text=reverse))
         x = int(text) + 1
         line_bot_api.push_message(gid, TextSendMessage(text=x))
+    if text.startswith("/mtp"):
+        separate = text.split(" ")
+        try:
+            m = int(text.replace(separate[0] + " ",""))
+            txt = ""
+            for i in range(m):
+	            x = i+1
+	            txt+=str(m) + " * " + str(x) + " > " + str(m * x)
+            line_bot_api.push_message(gid, TextSendMessage(text=txt))
+        except:
+            line_bot_api.push_message(gid, TextSendMessage(text="เฉพาะตัวเลขเท่านั้น"))
     if text.startswith("/spam "):
         separate = text.split(" ")
         texxt = text.replace(separate[0] + " ","")
