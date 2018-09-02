@@ -90,15 +90,15 @@ helpmessage = """[ บอทสาธารณะ ] เวอร์ชั่น 
 - /bye บอทออก
 
 ╭━━━━━━━━━━━━━━━━╮
-┃       คำสั่งที่คาดว่าจะมา
-╰━━━━━━━━━━━━━━━━╯
+┃                 เร็วๆ นี้
+╰━━━━━━━━━━━━━━━━
 - /ptgr [ ตัวเลข ] [ ตัวเลข ]
 - /graph [[ x ],[ y ]] กราฟ
 
 ติดต่อแอดมิน line.me/ti/p/~esci_"""
 
 groupcast = {}
-groupcastt = "ระบบจะปิดบอทอัตโนมัติในวันที่ 31 กันยายน 2561 เวลา 25:00 นาฬิกา"
+groupcastt = "ระบบจะปิดอัตโนมัติในวันที่ 31 กันยายน 2561 เวลา 25:00 นาฬิกา"
 
 # Post Request
 @app.route("/callback", methods=['POST'])
@@ -124,7 +124,7 @@ def handle_message(event):
     try:
         if groupcast[gid] == False:
             groupcast[gid] = True
-            h = "[ ประกาศ ]\n" + groupcastt
+            h = "[ ประกาศ ]\n\n" + groupcastt
             line_bot_api.push_message(gid, TextSendMessage(text=h))
     except:
         groupcast[gid] = True
