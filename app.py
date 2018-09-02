@@ -131,7 +131,7 @@ def handle_message(event):
             txt = "สูตรคูณแม่ " + str(m)
             for i in range(m):
 	            x = i+1
-	            txt+="\n" + str(m) + " * " + str(x) + " > " + str(m * x)
+	            txt+="\n" + str(m) + " * " + str(x) + " = " + str(m * x)
             line_bot_api.push_message(gid, TextSendMessage(text=txt))
         except:
             line_bot_api.push_message(gid, TextSendMessage(text="เฉพาะตัวเลขเท่านั้น"))
