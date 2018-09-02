@@ -89,6 +89,7 @@ def handle_message(event):
     text = event.message.text #simplify for receove message
     sender = event.source.user_id #get user_id
     gid = event.source.sender_id #get group_id
+    groupcast[gid] == False
     if text.startswith("/broadcast"):
         separate = text.split(" ")
         textt = text.replace(separate[0] + " ","")
@@ -109,7 +110,8 @@ def handle_message(event):
                 line_bot_api.push_message(gid, TextSendMessage(text="[ ประกาศ ]\n"+groupcastt))
                 groupcast[gid] = True
     except Exception as Error:
-        groupcast[gid]
+        groupcast[gid] = False
+        line_bot_api.push_message(gid, TextSendMessage(text="[ ประกาศ ]\n"+groupcastt))
     if text.isdigit():
         b = int(text)
         reverse = 0
