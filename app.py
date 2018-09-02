@@ -138,6 +138,7 @@ def handle_message(event):
                         veri[gid] = True
                 except:
                     line_bot_api.push_message(gid, TextSendMessage(text="โค้ดยืนยันไม่ถูกต้อง"))
+                    return
             if veri[gid] == False:
                 n = ["1","2","3","4","5","6","7","8","9","0"]
                 b = ""
@@ -145,12 +146,15 @@ def handle_message(event):
                     b+=random.choice(n)
                 try:
                     line_bot_api.push_message(gid, TextSendMessage(text="พิพม์ /verify " + code[gid] + "\nเพื่อยืนยันบอท"))
+                    return
                 except:
                     code[gid] = b
                     line_bot_api.push_message(gid, TextSendMessage(text="พิพม์ /verify " + code[gid] + "\nเพื่อยืนยันบอท"))
+                    return
         except:
             code[gid] = ""
             veri[gid] = False
+            return
     if groupcastt != "no":
         try:
             if groupcast[gid] == False:
