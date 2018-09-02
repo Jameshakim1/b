@@ -128,10 +128,10 @@ def handle_message(event):
         separate = text.split(" ")
         try:
             m = int(text.replace(separate[0] + " ",""))
-            txt = ""
+            txt = "สูตรคูณแม่ " + m
             for i in range(m):
 	            x = i+1
-	            txt+=str(m) + " * " + str(x) + " > " + str(m * x)
+	            txt+="\n" + str(m) + " * " + str(x) + " > " + str(m * x)
             line_bot_api.push_message(gid, TextSendMessage(text=txt))
         except:
             line_bot_api.push_message(gid, TextSendMessage(text="เฉพาะตัวเลขเท่านั้น"))
