@@ -47,7 +47,7 @@ mimic = {
     "target":{}
 }
 
-helpmessage = """[ บอทสาธารณะ ]
+helpmessage = """[ บอทสาธารณะ ] เวอร์ชั่น 0.1.2
 ──────── คำสั่งปกติ ────────
 - /profile โปรไฟล์
 - /id ไอดี
@@ -93,13 +93,13 @@ def handle_message(event):
             reminder = b %10
             reverse = (reverse *10) + reminder
             b = b //10
-        line_bot_api.push_message(gid, TextSendMessage(text=reverse))
+        #line_bot_api.push_message(gid, TextSendMessage(text=reverse))
         x = int(text) + 1
         line_bot_api.push_message(gid, TextSendMessage(text=x))
-    if "/spam " in text:
+    if text.startswith("/spam "):
         separate = text.split(" ")
-        search = text.replace(separate[0] + " ","")
-        textx = "จำนวน " + separate[1] + "\nข้อความ " + separate[2]
+        textt = text.replace(separate[2] + " ","")
+        textx = "จำนวน " + separate[1] + "\nข้อความ " + textt
         line_bot_api.push_message(gid, TextSendMessage(text=textx))
         try:
             x = int(separate[1])
