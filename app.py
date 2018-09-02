@@ -53,6 +53,7 @@ mimic = {
 }
 
 helpmessage = """[ บอทสาธารณะ ] เวอร์ชั่น 0.7.1
+* โค้ดหนึ่งใช้ได้ 100 คำสั่ง
 ╭━━━━━━━━━━━━━━━━╮
 ┃               คำสั่งปกติ
 ╰━━━━━━━━━━━━━━━━╯
@@ -103,6 +104,7 @@ helpmessage = """[ บอทสาธารณะ ] เวอร์ชั่น 
 groupcast = {}
 code = {}
 veri = {}
+codx = {}
 #groupcastt = "no"
 groupcastt = "ระบบจะปิดอัตโนมัติในวันที่ 31 กันยายน 2561 เวลา 25:00 นาฬิกา"
 
@@ -127,6 +129,21 @@ def handle_message(event):
     text = event.message.text #simplify for receove message
     sender = event.source.user_id #get user_id
     gid = event.source.sender_id #get group_id
+    try:
+        if veri[gid] == True:
+            codex[gid] = codex[gid] + 1
+    except:
+        veri[gid] = False
+        codex[gid] = 0
+    try:
+        if veri[gid] == True:
+            if codex[gid] == 5:
+                line_bot_api.push_message(gid, TextSendMessage(text="โค้ดหมดอายุแล้ว"))
+                veri[gid] = False
+                codex[gid] = 0
+    except:
+        veri[gid] = False
+        codex[gid] = 0
     if text.startswith("/verify"):
         try:
             if veri[gid] == True:
