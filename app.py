@@ -189,6 +189,35 @@ def handle_message(event):
             line_bot_api.push_message(gid, TextSendMessage(text=txt))
         except Exception as Err:
             line_bot_api.push_message(gid, TextSendMessage(text="THIS IS BETA"))"""
+    if text.startswith("/weather"):
+        weatherurl = 'https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20weather.forecast%20where%20woeid%20in%20(select%20woeid%20from%20geo.places(1)%20where%20text%3D%22bangkok%2C%20th%22)&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys'
+        req = requests.get(weatherurl)
+        x = req.json()
+        aa = x["query"]["results"]["channel"]["location"]
+        ab = x["query"]["results"]["channel"]["wind"]
+        ac = x["query"]["results"]["channel"]["atmosphere"]
+        ad = x["query"]["results"]["channel"]["astronomy"]
+        b = aa["city"]
+        c = ab["chill"]
+        d = ab["direction"]
+        e = ab["speed"]
+        f = ac["humidity"]
+        g = ac["pressure"]
+        h = ac["rising"]
+        i = ac["visibility"]
+        j = ad["sunrise"]
+        k = ad["sunset"]
+        txt = "สภาพอากาศ กรุงเทพมหานคร" +"\n──────────────\n"
+        txt+="ลม\nความเย็น " + c
+        txt+="\nทิศทาง " + d
+        txt+="\nความเร็ว " + e
+        txt+="\n\nบรรยากาศ\nความชื้น " + f
+        txt+="\nความดัน " + g
+        txt+="\nที่เพิ่มสูงขึ้น " + h
+        txt+="\nความชัดเจน " + i
+        txt+="\n\nพระอาทิตย์ขึ้น " + j
+        txt+="\nพระอาทิตย์ตกดิน " + k
+        line_bot_api.push_message(gid, TextSendMessage(text=txt))
     if text.startswith("/divide"):
         separate = text.split(" ")
         try:
