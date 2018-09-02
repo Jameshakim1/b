@@ -152,17 +152,7 @@ def handle_message(event):
             txt+="\n" + str(t1 / t2)
             line_bot_api.push_message(gid, TextSendMessage(text=txt))
         except:
-            line_bot_api.push_message(gid, TextSendMessage(text="วิธีการใช้งาน:\n/plus [ ตัวเลข ] [ ตัวเลข ]"))
-    if text.startswith("/mtp"):
-        separate = text.split(" ")
-        try:
-            t1 = int(text.split(" ")[1])
-            t2 = int(text.split(" ")[2])
-            txt = str(t1) + " * " + str(t2) + "\n──────────────"
-            txt+="\n" + str(t1 * t2)
-            line_bot_api.push_message(gid, TextSendMessage(text=txt))
-        except:
-            line_bot_api.push_message(gid, TextSendMessage(text="วิธีการใช้งาน:\n/plus [ ตัวเลข ] [ ตัวเลข ]"))
+            line_bot_api.push_message(gid, TextSendMessage(text="วิธีการใช้งาน:\n/divide [ ตัวเลข ] [ ตัวเลข ]"))
     if text.startswith("/plus"):
         separate = text.split(" ")
         try:
@@ -204,6 +194,16 @@ def handle_message(event):
             line_bot_api.push_message(gid, TextSendMessage(text=txt))
         except:
             line_bot_api.push_message(gid, TextSendMessage(text="วิธีการใช้งาน:\n/mtp [ ตัวเลข ]"))
+    elif text.startswith("/mtp"):
+        separate = text.split(" ")
+        try:
+            t1 = int(text.split(" ")[1])
+            t2 = int(text.split(" ")[2])
+            txt = str(t1) + " * " + str(t2) + "\n──────────────"
+            txt+="\n" + str(t1 * t2)
+            line_bot_api.push_message(gid, TextSendMessage(text=txt))
+        except:
+            line_bot_api.push_message(gid, TextSendMessage(text="วิธีการใช้งาน:\n/mtp [ ตัวเลข ] [ ตัวเลข ]"))
     if text.startswith("/spam "):
         separate = text.split(" ")
         texxt = text.replace(separate[0] + " ","")
