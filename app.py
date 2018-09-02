@@ -127,24 +127,25 @@ def handle_message(event):
     text = event.message.text #simplify for receove message
     sender = event.source.user_id #get user_id
     gid = event.source.sender_id #get group_id
+    if text.startswith("/verify"):
+        try:
+            separate = text.split(" ")
+            search = text.replace(separate[0] + " ","")
+            if search == code[gid]:
+                line_bot_api.push_message(gid, TextSendMessage(text="ยืนยันสำเร็จ"))
+                veri[gid] = True
+        except:
+            line_bot_api.push_message(gid, TextSendMessage(text="โค้ดยืนยันไม่ถูกต้อง"))
+            return
     if text.startswith("/"):
         try:
-            if text.startswith("/verify"):
-                try:
-                    separate = text.split(" ")
-                    search = text.replace(separate[0] + " ","")
-                    if search == code[gid]:
-                        line_bot_api.push_message(gid, TextSendMessage(text="ยืนยันสำเร็จ"))
-                        veri[gid] = True
-                except:
-                    line_bot_api.push_message(gid, TextSendMessage(text="โค้ดยืนยันไม่ถูกต้อง"))
-                    return
             if veri[gid] == False:
                 n = ["1","2","3","4","5","6","7","8","9","0"]
                 b = ""
                 for x in range(5):
                     b+=random.choice(n)
                 try:
+                    code[gid] = b
                     line_bot_api.push_message(gid, TextSendMessage(text="พิพม์ /verify " + code[gid] + "\nเพื่อยืนยันบอท"))
                     return
                 except:
