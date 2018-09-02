@@ -98,18 +98,18 @@ def handle_message(event):
     #        groupcast = {}
     #    else:
     #        pass
-    try:
-        if groupcastt != "":
-            if groupcast[gid] == True:
-                line_bot_api.push_message(gid, TextSendMessage(text="[ ประกาศ ]\n"+groupcastt))
-                groupcast[gid] = False
-            elif groupcast[gid] == False:
-                line_bot_api.push_message(gid, TextSendMessage(text="Error"))
-            else:
-                line_bot_api.push_message(gid, TextSendMessage(text="[ ประกาศ ]\n"+groupcastt))
-                groupcast[gid] = False
-    except Exception as Error:
-        line_bot_api.push_message(gid, TextSendMessage(text=Error))
+    #try:
+    #    if groupcastt != "":
+    #        if groupcast[gid] == True:
+    #            line_bot_api.push_message(gid, TextSendMessage(text="[ ประกาศ ]\n"+groupcastt))
+    #            groupcast[gid] = False
+    #        elif groupcast[gid] == False:
+    #            line_bot_api.push_message(gid, TextSendMessage(text="Error"))
+    #        else:
+    #            line_bot_api.push_message(gid, TextSendMessage(text="[ ประกาศ ]\n"+groupcastt))
+    #            groupcast[gid] = False
+    #except Exception as Error:
+    #    line_bot_api.push_message(gid, TextSendMessage(text=Error))
     if text.isdigit():
         b = int(text)
         reverse = 0
