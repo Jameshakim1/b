@@ -148,8 +148,8 @@ def handle_message(event):
     if text.startswith("/plus"):
         separate = text.split(" ")
         try:
-            t1 = text.split(" ")
-            t2 = t1.split(" ")
+            t1 = text.split(" ")[1]
+            t2 = text.split(" ")[2]
             txt = str(t1) + " + " + t2 + "\n──────────────"
             txt+="\n" + str(t1 + t2)
             line_bot_api.push_message(gid, TextSendMessage(text=txt))
@@ -158,8 +158,8 @@ def handle_message(event):
     if text.startswith("/minus"):
         separate = text.split(" ")
         try:
-            t1 = text.split(" ")
-            t2 = t1.split(" ")
+            t1 = text.split(" ")[1]
+            t2 = text.split(" ")[2]
             txt = str(t1) + " - " + t2 + "\n──────────────"
             txt+="\n" + str(t1 - t2)
             line_bot_api.push_message(gid, TextSendMessage(text=txt))
