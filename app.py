@@ -52,7 +52,7 @@ mimic = {
     "target":{}
 }
 
-helpmessage = """[ บอทสาธารณะ ] เวอร์ชั่น 0.5.6
+helpmessage = """[ บอทสาธารณะ ] เวอร์ชั่น 0.6.3
 ╭━━━━━━━━━━━━━━━━╮
 ┃               คำสั่งปกติ
 ╰━━━━━━━━━━━━━━━━╯
@@ -340,7 +340,7 @@ def handle_message(event):
     if text.startswith("/share"):
         quandl.ApiConfig.api_key = 'sSGoP_R7-sNMXusmJr7p'
         data = quandl.get("THAISE/INDEX")
-        line_bot_api.push_message(gid, TextSendMessage(text=data.head())
+        line_bot_api.push_message(gid, TextSendMessage(text=data.head()))
     if text.startswith("/snews"):
         separate = text.split(" ")
         searchx = text.replace(separate[0] + " ","")
