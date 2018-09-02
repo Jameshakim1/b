@@ -60,6 +60,7 @@ helpmessage = """[ บอทสาธารณะ ] เวอร์ชั่น 
 - /idline [ ไอดีไลน์ ]
 สร้างลิงก์แอดเพื่อน
 - /contact ติดต่อ
+
 ╭━━━━━━━━━━━━━━━━╮
 ┃                 คำสั่งพิเศษ
 ╰━━━━━━━━━━━━━━━━╯
@@ -75,7 +76,9 @@ helpmessage = """[ บอทสาธารณะ ] เวอร์ชั่น 
 ╰━━━━━━━━━━━━━━━━╯
 - /plus [ ตัวเลข ] [ ตัวเลข ] บวก
 - /minus [ ตัวเลข ] [ ตัวเลข ] ลบ
-- /mtp [ ตัวเลข ] สูตรคูณ
+- /divide [ ตัวเลข ] [ ตัวเลข ] หาร
+- /mtp [ ตัวเลข ] [ ตัวเลข ]  คูณ
+- /mtpt [ ตัวเลข ] สูตรคูณ
 - /sqrt [ ตัวเลข ] สแควรูท
 
 ╭━━━━━━━━━━━━━━━━╮
@@ -140,6 +143,26 @@ def handle_message(event):
         #line_bot_api.push_message(gid, TextSendMessage(text=reverse))
         x = int(text) + 1
         line_bot_api.push_message(gid, TextSendMessage(text=x))
+    if text.startswith("/divide"):
+        separate = text.split(" ")
+        try:
+            t1 = int(text.split(" ")[1])
+            t2 = int(text.split(" ")[2])
+            txt = str(t1) + " / " + str(t2) + "\n──────────────"
+            txt+="\n" + str(t1 / t2)
+            line_bot_api.push_message(gid, TextSendMessage(text=txt))
+        except:
+            line_bot_api.push_message(gid, TextSendMessage(text="วิธีการใช้งาน:\n/plus [ ตัวเลข ] [ ตัวเลข ]"))
+    if text.startswith("/mtp"):
+        separate = text.split(" ")
+        try:
+            t1 = int(text.split(" ")[1])
+            t2 = int(text.split(" ")[2])
+            txt = str(t1) + " * " + str(t2) + "\n──────────────"
+            txt+="\n" + str(t1 * t2)
+            line_bot_api.push_message(gid, TextSendMessage(text=txt))
+        except:
+            line_bot_api.push_message(gid, TextSendMessage(text="วิธีการใช้งาน:\n/plus [ ตัวเลข ] [ ตัวเลข ]"))
     if text.startswith("/plus"):
         separate = text.split(" ")
         try:
@@ -170,7 +193,7 @@ def handle_message(event):
         except:
             line_bot_api.push_message(gid, TextSendMessage(text="วิธีการใช้งาน:\n/sql [ ตัวเลข ]"))
 
-    if text.startswith("/mtp"):
+    if text.startswith("/mtpt"):
         separate = text.split(" ")
         try:
             m = int(text.replace(separate[0] + " ",""))
