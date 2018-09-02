@@ -98,7 +98,7 @@ def handle_message(event):
         line_bot_api.push_message(gid, TextSendMessage(text=x))
     if text.startswith("/spam "):
         separate = text.split(" ")
-        textt = text.replace(separate[2] + " ","")
+        textt = text.replace(separate[3] + " ","")
         textx = "จำนวน " + separate[1] + "\nข้อความ " + textt
         line_bot_api.push_message(gid, TextSendMessage(text=textx))
         try:
