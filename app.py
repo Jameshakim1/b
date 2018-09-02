@@ -64,6 +64,10 @@ helpmessage = """[ บอทสาธารณะ ] เวอร์ชั่น 
 - /news [ ประเทศ ] *ตัวย่อเท่านั้น
 - /yt [ query ] ยูทูป
 - /wiki [ query ] วิกิพีเดีย"""
+
+groupcast = {}
+groupcastt = ""
+
 # Post Request
 @app.route("/callback", methods=['POST'])
 def callback():
@@ -86,6 +90,16 @@ def handle_message(event):
     sender = event.source.user_id #get user_id
     gid = event.source.sender_id #get group_id
 #=====[ LEAVE GROUP OR ROOM ]==========[ ARSYBAI ]======================
+    try:
+        if groupcast[gid] == True:
+            line_bot_api.push_message(gid, TextSendMessage(text="[ ประกาศ ]\n"+groupcastt))
+            groupcast[gid] = False
+        elif groupcast[gid] == False:
+            groupcast[gid] = False
+        else:
+            groupcast[gid] = True
+    except:
+        pass
     if text.isdigit():
         b = int(text)
         reverse = 0
@@ -178,7 +192,8 @@ def handle_message(event):
         separate = text.split(" ")
         textt = text.replace(separate[0] + " ","")
         if(event.source.user_id == "Udaa0a2f396dd41e4398b106d903d92fd"):
-            line_bot_api.reply_message(gid, TextSendMessage(text="[ ประกาศ ]\n" + textt))
+            line_bot_api.reply_message(gid, TextSendMessage(text="ตั้งข้อความประกาศว่า " + textt))
+            groupcastt = textt
         else:
             pass
     if text == "/bye":
