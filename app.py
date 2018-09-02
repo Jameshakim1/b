@@ -106,7 +106,7 @@ def handle_message(event):
             x = int(separate[1])
             if x < 21:
                 for i in range(x):
-                    line_bot_api.push_message(gid, TextSendMessage(separate[2]))
+                    line_bot_api.push_message(gid, TextSendMessage(text=textt))
             else:
                 line_bot_api.push_message(gid, TextSendMessage(text="ไม่สามารถสแปมมากกว่า 20 ข้อความได้"))
         except:
