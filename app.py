@@ -145,12 +145,32 @@ def handle_message(event):
         #line_bot_api.push_message(gid, TextSendMessage(text=reverse))
         x = int(text) + 1
         line_bot_api.push_message(gid, TextSendMessage(text=x))
+    if text.startswith("/plus"):
+        separate = text.split(" ")
+        try:
+            t1 = text.split(" ")
+            t2 = t1.split(" ")
+            txt = str(t1) + " + " + t2 + "\n──────────────"
+            txt+="\n" + str(t1 + t2)
+            line_bot_api.push_message(gid, TextSendMessage(text=txt))
+        except:
+            line_bot_api.push_message(gid, TextSendMessage(text="เฉพาะตัวเลขเท่านั้น"))
+    if text.startswith("/minus"):
+        separate = text.split(" ")
+        try:
+            t1 = text.split(" ")
+            t2 = t1.split(" ")
+            txt = str(t1) + " - " + t2 + "\n──────────────"
+            txt+="\n" + str(t1 - t2)
+            line_bot_api.push_message(gid, TextSendMessage(text=txt))
+        except:
+            line_bot_api.push_message(gid, TextSendMessage(text="เฉพาะตัวเลขเท่านั้น"))
     if text.startswith("/sqrt"):
         separate = text.split(" ")
         try:
             m = int(text.replace(separate[0] + " ",""))
             txt = "สแควรูท " + str(m) + "\n──────────────"
-            txt+=str(math.sqrt(m))
+            txt+="\n" + str(math.sqrt(m))
             line_bot_api.push_message(gid, TextSendMessage(text=txt))
         except:
             line_bot_api.push_message(gid, TextSendMessage(text="เฉพาะตัวเลขเท่านั้น"))
