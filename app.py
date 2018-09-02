@@ -129,7 +129,7 @@ def handle_message(event):
         try:
             m = int(text.replace(separate[0] + " ",""))
             txt = "สูตรคูณแม่ " + str(m)
-            for i in range(m):
+            for i in range(12):
 	            x = i+1
 	            txt+="\n" + str(m) + " * " + str(x) + " = " + str(m * x)
             line_bot_api.push_message(gid, TextSendMessage(text=txt))
