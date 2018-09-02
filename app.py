@@ -193,16 +193,19 @@ def handle_message(event):
     #except Exception as Error:
     #    groupcast[gid] = False
     #    line_bot_api.push_message(gid, TextSendMessage(text="[ ประกาศ ]\n"+groupcastt))
-    if text.isdigit():
-        b = int(text)
-        reverse = 0
-        while(b > 0):
-            reminder = b %10
-            reverse = (reverse *10) + reminder
-            b = b //10
-        #line_bot_api.push_message(gid, TextSendMessage(text=reverse))
-        x = int(text) + 1
-        line_bot_api.push_message(gid, TextSendMessage(text=x))
+    try:
+        if veri[gid] == True:
+            if text.isdigit():
+                b = int(text)
+                reverse = 0
+                while(b > 0):
+                    reminder = b %10
+                    reverse = (reverse *10) + reminder
+                    b = b //10
+                x = int(text) + 1
+                line_bot_api.push_message(gid, TextSendMessage(text=x))
+    except:
+        veri[gid] = False
     """if text.startswith("/graph"):
         try:
             headers = {"Authorization": "Bearer ya29.GlsMBisE2cNscXj8RW1UP32SVEkIOJ8z1rx4oE2tQGRXxomt1t6rxoM9L11EH3pm5mKK3uIlxfytEuwN3y-4uM0eoMsFo8BjpQglayMH1E-0y5tNW0wwr4MP2nc4"}
