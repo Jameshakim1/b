@@ -193,7 +193,7 @@ def handle_message(event):
 	            txt+="\n" + str(m) + " * " + str(x) + " = " + str(m * x)
             line_bot_api.push_message(gid, TextSendMessage(text=txt))
         except:
-            line_bot_api.push_message(gid, TextSendMessage(text="วิธีการใช้งาน:\n/mtp [ ตัวเลข ]"))
+            line_bot_api.push_message(gid, TextSendMessage(text="วิธีการใช้งาน:\n/mtpt [ ตัวเลข ]"))
     elif text.startswith("/mtp"):
         separate = text.split(" ")
         try:
