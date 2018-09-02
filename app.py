@@ -164,7 +164,7 @@ def handle_message(event):
         for anu in data["videos"]:
             no += 1
             result += "\n{}. {}\n{}\n".format(str(no),str(anu["title"]),str(anu["webpage"]))
-        result += "ทั้งหมด {}".format(str(len(data["videos"])))
+        result += "\nทั้งหมด {}".format(str(len(data["videos"])))
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=result))
     if text.startswith("/news"):
         try:
@@ -178,12 +178,12 @@ def handle_message(event):
             n = 0
             for anu in data["articles"]:
                 if len(result) > 500:
-                    result+="ทั้งหมด {}".format(n)
+                    result+="\nทั้งหมด {}".format(n)
                     line_bot_api.reply_message(event.reply_token, TextSendMessage(text=result))
                 else:
                     n = n + 1
                     result+="\n" + anu["title"] + "\n"+anu["url"]+"\n"
-            result+="ทั้งหมด {}".format(n)
+            result+="\nทั้งหมด {}".format(n)
             line_bot_api.push_message(gid, TextSendMessage(text=result))
         except Exception as Error:
             line_bot_api.reply_message(event.reply_token, TextSendMessage(text=Error))
