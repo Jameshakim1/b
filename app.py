@@ -2,6 +2,7 @@ from flask import Flask, request, abort
 from bs4 import BeautifulSoup
 import wikipedia
 import re
+import matplotlib.pyplot as plt
 import goslate
 import math
 from gtts import gTTS
@@ -80,11 +81,17 @@ helpmessage = """[ บอทสาธารณะ ] เวอร์ชั่น 
 - /mtp [ ตัวเลข ] [ ตัวเลข ]  คูณ
 - /mtpt [ ตัวเลข ] สูตรคูณ
 - /sqrt [ ตัวเลข ] สแควรูท
+- /graph [[x],[y]] กราฟ
 
 ╭━━━━━━━━━━━━━━━━╮
 ┃           คำสั่งเฉพาะแอดมิน
 ╰━━━━━━━━━━━━━━━━╯
 - /bye บอทออก
+
+╭━━━━━━━━━━━━━━━━╮
+┃           คำสั่งที่คาดว่าจะมา
+╰━━━━━━━━━━━━━━━━╯
+- /ptgr [ ตัวเลข ] [ ตัวเลข ]
 
 ติดต่อแอดมิน line.me/ti/p/~esci_"""
 
@@ -143,6 +150,29 @@ def handle_message(event):
         #line_bot_api.push_message(gid, TextSendMessage(text=reverse))
         x = int(text) + 1
         line_bot_api.push_message(gid, TextSendMessage(text=x))
+    if text.startswith("/graph"):
+        headers = {"Authorization": "Bearer ya29.GlsMBisE2cNscXj8RW1UP32SVEkIOJ8z1rx4oE2tQGRXxomt1t6rxoM9L11EH3pm5mKK3uIlxfytEuwN3y-4uM0eoMsFo8BjpQglayMH1E-0y5tNW0wwr4MP2nc4"}
+        x = text.split(" ")[1]
+        y = text.split(" ")[2]
+        plt.plot(x, y)
+        plt.xlabel('x - axis')
+        plt.ylabel('y - axis')
+        plt.title('[ By PASUNx ]')
+        plt.savefig('b.png', dpi=100)
+        para = {
+            "name": "b.png",
+             "parents": ["1ohcThxOTwMY-wLeP4UWaBTf_Dc7Fyr-b"]
+        }
+        files = {
+            'data': ('metadata', json.dumps(para), 'application/json; charset=UTF-8'),
+            'file': open("./b.png", "rb")
+        }
+        r = requests.post(
+            "https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart",
+            headers=headers,
+            files=files
+        )
+        line_bot_api.push_message(gid, TextSendMessage(text="https://drive.google.com/file/d/" + r.json()["id"] + "/view"))
     if text.startswith("/divide"):
         separate = text.split(" ")
         try:
