@@ -145,7 +145,7 @@ def handle_message(event):
         try:
             t1 = int(text.split(" ")[1])
             t2 = int(text.split(" ")[2])
-            txt = str(t1) + " + " + t2 + "\n──────────────"
+            txt = str(t1) + " + " + str(t2) + "\n──────────────"
             txt+="\n" + str(t1 + t2)
             line_bot_api.push_message(gid, TextSendMessage(text=txt))
         except:
@@ -155,7 +155,7 @@ def handle_message(event):
         try:
             t1 = int(text.split(" ")[1])
             t2 = int(text.split(" ")[2])
-            txt = str(t1) + " - " + t2 + "\n──────────────"
+            txt = str(t1) + " - " + str(t2) + "\n──────────────"
             txt+="\n" + str(t1 - t2)
             line_bot_api.push_message(gid, TextSendMessage(text=txt))
         except:
