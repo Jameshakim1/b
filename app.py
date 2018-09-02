@@ -160,7 +160,7 @@ def handle_message(event):
         url = requests.get("http://api.w3hills.com/youtube/search?keyword={}&api_key=86A7FCF3-6CAF-DEB9-E214-B74BDB835B5B".format(search))
         data = url.json()
         no = 0
-        result = "ค้นหา ยูทูป"
+        result = "ค้นหา ยูทูป" + "\n──────────────"
         for anu in data["videos"]:
             no += 1
             result += "\n{}. {}\n{}".format(str(no),str(anu["title"]),str(anu["webpage"]))
@@ -174,7 +174,7 @@ def handle_message(event):
             user_agent = {'User-agent': 'Mozilla/5.0'}
             url = requests.get("https://newsapi.org/v2/top-headlines?country={}&apiKey=763b6fc67a594a4e9e0f9d29303f83dd".format(country))
             data = url.json()
-            result="ข่าวใหม่ ( " + country.upper() + " )"
+            result="ข่าวใหม่ ( " + country.upper() + " )" + "\n──────────────"
             for anu in data["articles"]:
                 if len(result) > 500:
                     line_bot_api.reply_message(event.reply_token, TextSendMessage(text=result))
@@ -195,7 +195,7 @@ def handle_message(event):
         soup = BeautifulSoup(content, "html.parser")
         st_divs = soup.findAll("div", {"class": "st"})
         g_divs = soup.findAll("div", {"class": "g"})
-        trs="ข่าวเกี่ยวกับ " + searchx
+        trs="ข่าวเกี่ยวกับ " + searchx + "\n──────────────"
         news_d = []
         for g_div in g_divs: 
             news_d.append(g_div.text)
