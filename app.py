@@ -209,7 +209,7 @@ def handle_message(event):
         j = ad["sunrise"]
         k = ad["sunset"]
         o = str((int(c) - 32)/1.8)
-        o = t[:t.index('.')]
+        o = o[:o.index('.')]
         txt = "สภาพอากาศ กรุงเทพมหานคร" +"\n──────────────\n"
         txt+="อุณหถูมิ " + o + " ℃"
         txt+="\nลม\nความเย็น " + c
