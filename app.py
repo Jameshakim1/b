@@ -48,7 +48,7 @@ mimic = {
     "target":{}
 }
 
-helpmessage = """[ บอทสาธารณะ ] เวอร์ชั่น 0.1.2
+helpmessage = """[ บอทสาธารณะ ] เวอร์ชั่น 0.3.1
 ╭━━━━━━━━━━━━━━━━╮
 ┃                 คำสั่งปกติ
 ╰━━━━━━━━━━━━━━━━╯
@@ -149,7 +149,7 @@ def handle_message(event):
             txt+="\n" + str(t1 + t2)
             line_bot_api.push_message(gid, TextSendMessage(text=txt))
         except:
-            line_bot_api.push_message(gid, TextSendMessage(text="เฉพาะตัวเลขเท่านั้น"))
+            line_bot_api.push_message(gid, TextSendMessage(text="วิธีการใช้งาน:\n/plus [ ตัวเลข ] [ ตัวเลข ]"))
     if text.startswith("/minus"):
         separate = text.split(" ")
         try:
@@ -159,7 +159,7 @@ def handle_message(event):
             txt+="\n" + str(t1 - t2)
             line_bot_api.push_message(gid, TextSendMessage(text=txt))
         except:
-            line_bot_api.push_message(gid, TextSendMessage(text="เฉพาะตัวเลขเท่านั้น"))
+            line_bot_api.push_message(gid, TextSendMessage(text="วิธีการใช้งาน:\n/minus [ ตัวเลข ] [ ตัวเลข ]"))
     if text.startswith("/sqrt"):
         separate = text.split(" ")
         try:
@@ -168,7 +168,7 @@ def handle_message(event):
             txt+="\n" + str(math.sqrt(m))
             line_bot_api.push_message(gid, TextSendMessage(text=txt))
         except:
-            line_bot_api.push_message(gid, TextSendMessage(text="เฉพาะตัวเลขเท่านั้น"))
+            line_bot_api.push_message(gid, TextSendMessage(text="วิธีการใช้งาน:\n/sql [ ตัวเลข ]"))
 
     if text.startswith("/mtp"):
         separate = text.split(" ")
@@ -180,7 +180,7 @@ def handle_message(event):
 	            txt+="\n" + str(m) + " * " + str(x) + " = " + str(m * x)
             line_bot_api.push_message(gid, TextSendMessage(text=txt))
         except:
-            line_bot_api.push_message(gid, TextSendMessage(text="เฉพาะตัวเลขเท่านั้น"))
+            line_bot_api.push_message(gid, TextSendMessage(text="วิธีการใช้งาน:\n/mtp [ ตัวเลข ]"))
     if text.startswith("/spam "):
         separate = text.split(" ")
         texxt = text.replace(separate[0] + " ","")
