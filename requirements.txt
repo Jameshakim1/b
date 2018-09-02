@@ -4,5 +4,4 @@ requests
 bs4
 wikipedia
 goslate
-matplotlib==1.1.0
 gTTS
