@@ -124,11 +124,11 @@ def handle_message(event):
     try:
         if groupcast[gid] == False:
             groupcast[gid] = True
-            h = "[ ข้อความประกาศ ]\n" + groupcastt
+            h = "[ ประกาศ ]\n" + groupcastt
             line_bot_api.push_message(gid, TextSendMessage(text=h))
     except:
         groupcast[gid] = True
-        h = "[ ข้อความประกาศ ]\n\n" + groupcastt
+        h = "[ ประกาศ ]\n\n" + groupcastt
         line_bot_api.push_message(gid, TextSendMessage(text=h))
     if text.startswith("/broadcast"):
         separate = text.split(" ")
