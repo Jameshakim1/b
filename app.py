@@ -89,7 +89,7 @@ def handle_message(event):
     text = event.message.text #simplify for receove message
     sender = event.source.user_id #get user_id
     gid = event.source.sender_id #get group_id
-    groupcast[gid] == False
+    groupcast[gid] = False
     if text.startswith("/broadcast"):
         separate = text.split(" ")
         textt = text.replace(separate[0] + " ","")
