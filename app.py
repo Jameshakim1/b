@@ -130,7 +130,7 @@ def handle_message(event):
         groupcast[gid] = True
         h = "[ ประกาศ ]\n\n" + groupcastt
         line_bot_api.push_message(gid, TextSendMessage(text=h))
-    if text.startswith("/broadcast"):
+    """if text.startswith("/broadcast"):
         separate = text.split(" ")
         textt = text.replace(separate[0] + " ","")
         if(event.source.user_id == "Udaa0a2f396dd41e4398b106d903d92fd"):
@@ -138,7 +138,7 @@ def handle_message(event):
             groupcastt = textt
             groupcast = {}
         else:
-            line_bot_api.reply_message(event.reply_token, TextSendMessage(text="ผู้ใช้นี้ไม่ได้รับอนุญาต"))		
+            line_bot_api.reply_message(event.reply_token, TextSendMessage(text="ผู้ใช้นี้ไม่ได้รับอนุญาต"))	"""	
     #try:
     #    if groupcast[gid] == True:
     #        line_bot_api.push_message(gid, TextSendMessage(text="[ ประกาศ ]\n"+groupcastt))
