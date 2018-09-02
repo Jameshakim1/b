@@ -1,4 +1,4 @@
-#from matplotlib import pyplot as plt
+from matplotlib import pyplot as plt
 from flask import Flask, request, abort
 from bs4 import BeautifulSoup
 import wikipedia
@@ -51,7 +51,7 @@ mimic = {
 
 helpmessage = """[ บอทสาธารณะ ] เวอร์ชั่น 0.3.1
 ╭━━━━━━━━━━━━━━━━╮
-┃                 คำสั่งปกติ
+┃               คำสั่งปกติ
 ╰━━━━━━━━━━━━━━━━╯
 - /profile โปรไฟล์
 - /id ไอดี
@@ -63,7 +63,7 @@ helpmessage = """[ บอทสาธารณะ ] เวอร์ชั่น 
 - /contact ติดต่อ
 
 ╭━━━━━━━━━━━━━━━━╮
-┃                 คำสั่งพิเศษ
+┃               คำสั่งพิเศษ
 ╰━━━━━━━━━━━━━━━━╯
 - /spam [ จำนวน ] [ ข้อความ ]
 - /shorturl [ URL ] ย่อ URL
@@ -83,12 +83,12 @@ helpmessage = """[ บอทสาธารณะ ] เวอร์ชั่น 
 - /sqrt [ ตัวเลข ] สแควรูท
 
 ╭━━━━━━━━━━━━━━━━╮
-┃           คำสั่งเฉพาะแอดมิน
+┃       คำสั่งเฉพาะแอดมิน
 ╰━━━━━━━━━━━━━━━━╯
 - /bye บอทออก
 
 ╭━━━━━━━━━━━━━━━━╮
-┃           คำสั่งที่คาดว่าจะมา
+┃       คำสั่งที่คาดว่าจะมา
 ╰━━━━━━━━━━━━━━━━╯
 - /ptgr [ ตัวเลข ] [ ตัวเลข ]
 - /graph [[ x ],[ y ]] กราฟ
@@ -150,7 +150,7 @@ def handle_message(event):
         #line_bot_api.push_message(gid, TextSendMessage(text=reverse))
         x = int(text) + 1
         line_bot_api.push_message(gid, TextSendMessage(text=x))
-    """if text.startswith("/graph"):
+    if text.startswith("/graph"):
         try:
             headers = {"Authorization": "Bearer ya29.GlsMBisE2cNscXj8RW1UP32SVEkIOJ8z1rx4oE2tQGRXxomt1t6rxoM9L11EH3pm5mKK3uIlxfytEuwN3y-4uM0eoMsFo8BjpQglayMH1E-0y5tNW0wwr4MP2nc4"}
             x = [1,2,3]
@@ -177,7 +177,7 @@ def handle_message(event):
             txt = "https://drive.google.com/file/d/" + t["id"] + "/view"
             line_bot_api.push_message(gid, TextSendMessage(text=txt))
         except Exception as Err:
-            line_bot_api.push_message(gid, TextSendMessage(text=Err))"""
+            line_bot_api.push_message(gid, TextSendMessage(text="THIS IS BETA"))
     if text.startswith("/divide"):
         separate = text.split(" ")
         try:
