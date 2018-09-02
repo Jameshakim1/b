@@ -98,7 +98,7 @@ helpmessage = """[ บอทสาธารณะ ] เวอร์ชั่น 
 ติดต่อแอดมิน line.me/ti/p/~esci_"""
 
 groupcast = {}
-groupcastt = "ประกาศปืดบอทชั่วคราวในเวลา 4:00"
+groupcastt = "ระบบจะปืดอัตโนมัติในวันที่ 31 กันยายน 2561 เวลา 26:00 "
 
 # Post Request
 @app.route("/callback", methods=['POST'])
