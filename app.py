@@ -98,7 +98,7 @@ helpmessage = """[ บอทสาธารณะ ] เวอร์ชั่น 
 ติดต่อแอดมิน line.me/ti/p/~esci_"""
 
 groupcast = {}
-groupcastt = "[ ONLINE ]"
+groupcastt = "ประกาศปืดบอทชั่วคราวในเวลา 4:00"
 
 # Post Request
 @app.route("/callback", methods=['POST'])
@@ -128,17 +128,17 @@ def handle_message(event):
             line_bot_api.push_message(gid, TextSendMessage(text=h))
     except:
         groupcast[gid] = True
-        h = "[ ข้อความประกาศ ]\n" + groupcastt
+        h = "[ ข้อความประกาศ ]\n\n" + groupcastt
         line_bot_api.push_message(gid, TextSendMessage(text=h))
-    #if text.startswith("/broadcast"):
-    #    separate = text.split(" ")
-    #    textt = text.replace(separate[0] + " ","")
-    #    if(event.source.user_id == "Udaa0a2f396dd41e4398b106d903d92fd"):
-    #        line_bot_api.reply_message(gid, TextSendMessage(text="ตั้งข้อความประกาศว่า " + textt))
-    #        groupcastt = textt
-    #        groupcast = {}
-    #    else:
-    #        pass			
+    if text.startswith("/broadcast"):
+        separate = text.split(" ")
+        textt = text.replace(separate[0] + " ","")
+        if(event.source.user_id == "Udaa0a2f396dd41e4398b106d903d92fd"):
+            line_bot_api.reply_message(gid, TextSendMessage(text="ตั้งข้อความประกาศว่า " + textt))
+            groupcastt = textt
+            groupcast = {}
+        else:
+            pass			
     #try:
     #    if groupcast[gid] == True:
     #        line_bot_api.push_message(gid, TextSendMessage(text="[ ประกาศ ]\n"+groupcastt))
