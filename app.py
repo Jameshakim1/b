@@ -163,8 +163,8 @@ def handle_message(event):
         result = "ค้นหา ยูทูป" + "\n──────────────"
         for anu in data["videos"]:
             no += 1
-            result += "\n{}. {}\n{}".format(str(no),str(anu["title"]),str(anu["webpage"]))
-        result += "\nทั้งหมด {}".format(str(len(data["videos"])))
+            result += "\n{}. {}\n{}\n".format(str(no),str(anu["title"]),str(anu["webpage"]))
+        result += "ทั้งหมด {}".format(str(len(data["videos"])))
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=result))
     if text.startswith("/news"):
         try:
@@ -175,11 +175,15 @@ def handle_message(event):
             url = requests.get("https://newsapi.org/v2/top-headlines?country={}&apiKey=763b6fc67a594a4e9e0f9d29303f83dd".format(country))
             data = url.json()
             result="ข่าวใหม่ ( " + country.upper() + " )" + "\n──────────────"
+            n = 0
             for anu in data["articles"]:
                 if len(result) > 500:
+                    result+="ทั้งหมด {}".format(n)
                     line_bot_api.reply_message(event.reply_token, TextSendMessage(text=result))
                 else:
+                    n = n + 1
                     result+="\n" + anu["title"] + "\n"+anu["url"]+"\n"
+            result+="ทั้งหมด {}".format(n)
             line_bot_api.push_message(gid, TextSendMessage(text=result))
         except Exception as Error:
             line_bot_api.reply_message(event.reply_token, TextSendMessage(text=Error))
