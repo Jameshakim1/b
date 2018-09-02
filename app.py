@@ -1,6 +1,7 @@
 #import matplotlib
 #matplotlib.use('Agg')
 #import matplotlib.pyplot as plt
+import quandl
 from flask import Flask, request, abort
 from bs4 import BeautifulSoup
 import wikipedia
@@ -73,6 +74,8 @@ helpmessage = """[ บอทสาธารณะ ] เวอร์ชั่น 
 - /news [ ประเทศ ] *ตัวย่อเท่านั้น
 - /yt [ query ] ยูทูป
 - /wiki [ query ] วิกิพีเดีย
+- /weather สภาพอากาศ
+- /share ดูหุ้น
 
 ╭━━━━━━━━━━━━━━━━╮
 ┃           คณิตศาสตร์
@@ -83,7 +86,6 @@ helpmessage = """[ บอทสาธารณะ ] เวอร์ชั่น 
 - /mtp [ ตัวเลข ] [ ตัวเลข ]  คูณ
 - /mtpt [ ตัวเลข ] สูตรคูณ
 - /sqrt [ ตัวเลข ] สแควรูท
-- /weather สภาพอากาศ
 
 ╭━━━━━━━━━━━━━━━━╮
 ┃       คำสั่งเฉพาะแอดมิน
@@ -335,6 +337,10 @@ def handle_message(event):
             line_bot_api.push_message(gid, TextSendMessage(text=result))
         except Exception as Error:
             line_bot_api.reply_message(event.reply_token, TextSendMessage(text=Error))
+    if text.startswith("/share"):
+        quandl.ApiConfig.api_key = 'sSGoP_R7-sNMXusmJr7p'
+        data = quandl.get("THAISE/INDEX")
+        line_bot_api.push_message(gid, TextSendMessage(text=data.head())
     if text.startswith("/snews"):
         separate = text.split(" ")
         searchx = text.replace(separate[0] + " ","")
