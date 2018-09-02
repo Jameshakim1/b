@@ -1,4 +1,4 @@
-from matplotlib import pyplot as plt
+#from matplotlib import pyplot as plt
 from flask import Flask, request, abort
 from bs4 import BeautifulSoup
 import wikipedia
