@@ -52,7 +52,7 @@ mimic = {
     "target":{}
 }
 
-helpmessage = """[ บอทสาธารณะ ] เวอร์ชั่น 0.6.3
+helpmessage = """[ บอทสาธารณะ ] เวอร์ชั่น 0.7.1
 ╭━━━━━━━━━━━━━━━━╮
 ┃               คำสั่งปกติ
 ╰━━━━━━━━━━━━━━━━╯
@@ -101,7 +101,8 @@ helpmessage = """[ บอทสาธารณะ ] เวอร์ชั่น 
 ติดต่อแอดมิน line.me/ti/p/~esci_"""
 
 groupcast = {}
-groupcastt = "ระบบจะปิดอัตโนมัติในวันที่ 31 กันยายน 2561 เวลา 25:00 นาฬิกา"
+groupcastt = "no"
+#groupcastt = "ระบบจะปิดอัตโนมัติในวันที่ 31 กันยายน 2561 เวลา 25:00 นาฬิกา"
 
 # Post Request
 @app.route("/callback", methods=['POST'])
@@ -124,15 +125,16 @@ def handle_message(event):
     text = event.message.text #simplify for receove message
     sender = event.source.user_id #get user_id
     gid = event.source.sender_id #get group_id
-    try:
-        if groupcast[gid] == False:
+    if groupcastt != "no":
+        try:
+            if groupcast[gid] == False:
+                groupcast[gid] = True
+                h = "[ ประกาศ ]\n\n" + groupcastt
+                line_bot_api.push_message(gid, TextSendMessage(text=h))
+        except:
             groupcast[gid] = True
             h = "[ ประกาศ ]\n\n" + groupcastt
             line_bot_api.push_message(gid, TextSendMessage(text=h))
-    except:
-        groupcast[gid] = True
-        h = "[ ประกาศ ]\n\n" + groupcastt
-        line_bot_api.push_message(gid, TextSendMessage(text=h))
     """if text.startswith("/broadcast"):
         separate = text.split(" ")
         textt = text.replace(separate[0] + " ","")
@@ -340,7 +342,7 @@ def handle_message(event):
     if text.startswith("/share"):
         quandl.ApiConfig.api_key = 'sSGoP_R7-sNMXusmJr7p'
         data = quandl.get("THAISE/INDEX")
-        line_bot_api.push_message(gid, TextSendMessage(text=data.head()))
+        line_bot_api.push_message(gid, TextSendMessage(text=data))
     if text.startswith("/snews"):
         separate = text.split(" ")
         searchx = text.replace(separate[0] + " ","")
