@@ -138,7 +138,7 @@ def handle_message(event):
             groupcastt = textt
             groupcast = {}
         else:
-            pass			
+            line_bot_api.reply_message(event.reply_token, TextSendMessage(text="ผู้ใช้นี้ไม่ได้รับอนุญาต"))		
     #try:
     #    if groupcast[gid] == True:
     #        line_bot_api.push_message(gid, TextSendMessage(text="[ ประกาศ ]\n"+groupcastt))
