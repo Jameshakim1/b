@@ -3,6 +3,7 @@ from bs4 import BeautifulSoup
 import wikipedia
 import re
 import goslate
+import math
 from gtts import gTTS
 from linebot import (
     LineBotApi, WebhookHandler
@@ -68,7 +69,12 @@ helpmessage = """[ บอทสาธารณะ ] เวอร์ชั่น 
 - /news [ ประเทศ ] *ตัวย่อเท่านั้น
 - /yt [ query ] ยูทูป
 - /wiki [ query ] วิกิพีเดีย
+
+╭━━━━━━━━━━━━━━━━╮
+┃           คณิตศาสตร์
+╰━━━━━━━━━━━━━━━━╯
 - /mtp [ ตัวเลข ] สูตรคูณ
+- /sqrt [ ตัวเลข ] สแควรูท
 
 ╭━━━━━━━━━━━━━━━━╮
 ┃           คำสั่งเฉพาะแอดมิน
@@ -137,6 +143,15 @@ def handle_message(event):
         #line_bot_api.push_message(gid, TextSendMessage(text=reverse))
         x = int(text) + 1
         line_bot_api.push_message(gid, TextSendMessage(text=x))
+    if text.startswith("/sqrt"):
+        separate = text.split(" ")
+        try:
+            m = int(text.replace(separate[0] + " ",""))
+            txt = "สแควรูท " + str(m) + "\n──────────────"
+	        txt+=math.sqrt(m)
+            line_bot_api.push_message(gid, TextSendMessage(text=txt))
+        except:
+            line_bot_api.push_message(gid, TextSendMessage(text="เฉพาะตัวเลขเท่านั้น"))
     if text.startswith("/mtp"):
         separate = text.split(" ")
         try:
