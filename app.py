@@ -101,8 +101,10 @@ helpmessage = """[ บอทสาธารณะ ] เวอร์ชั่น 
 ติดต่อแอดมิน line.me/ti/p/~esci_"""
 
 groupcast = {}
-groupcastt = "no"
-#groupcastt = "ระบบจะปิดอัตโนมัติในวันที่ 31 กันยายน 2561 เวลา 25:00 นาฬิกา"
+code = {}
+veri = {}
+#groupcastt = "no"
+groupcastt = "ระบบจะปิดอัตโนมัติในวันที่ 31 กันยายน 2561 เวลา 25:00 นาฬิกา"
 
 # Post Request
 @app.route("/callback", methods=['POST'])
@@ -125,6 +127,30 @@ def handle_message(event):
     text = event.message.text #simplify for receove message
     sender = event.source.user_id #get user_id
     gid = event.source.sender_id #get group_id
+    if text.startswith("/"):
+        try:
+            if text.startswith("/verify"):
+                try:
+                    separate = text.split(" ")
+                    search = text.replace(separate[0] + " ","")
+                    if search == code[gid]:
+                        line_bot_api.push_message(gid, TextSendMessage(text="ยืนยันสำเร็จ"))
+                        veri[gid] = True
+                except:
+                    line_bot_api.push_message(gid, TextSendMessage(text="โค้ดยืนยันไม่ถูกต้อง"))
+            if veri[gid] == False:
+                n = ["1","2","3","4","5","6","7","8","9","0"]
+                b = ""
+                for x in range(5):
+                    b+=random.choice(n)
+                try:
+                    line_bot_api.push_message(gid, TextSendMessage(text="พิพม์ /verify " + code[gid] + "\nเพื่อยืนยันบอท"))
+                except:
+                    code[gid] = b
+                    line_bot_api.push_message(gid, TextSendMessage(text="พิพม์ /verify " + code[gid] + "\nเพื่อยืนยันบอท"))
+        except:
+            code[gid] = ""
+            veri[gid] = False
     if groupcastt != "no":
         try:
             if groupcast[gid] == False:
@@ -132,9 +158,7 @@ def handle_message(event):
                 h = "[ ประกาศ ]\n\n" + groupcastt
                 line_bot_api.push_message(gid, TextSendMessage(text=h))
         except:
-            groupcast[gid] = True
-            h = "[ ประกาศ ]\n\n" + groupcastt
-            line_bot_api.push_message(gid, TextSendMessage(text=h))
+            groupcast[gid] = False
     """if text.startswith("/broadcast"):
         separate = text.split(" ")
         textt = text.replace(separate[0] + " ","")
