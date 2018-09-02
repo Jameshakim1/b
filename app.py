@@ -65,7 +65,7 @@ helpmessage = """[ บอทสาธารณะ ] เวอร์ชั่น 
 - /yt [ query ] ยูทูป
 - /wiki [ query ] วิกิพีเดีย"""
 
-groupcast = {}
+groupcast = {1:False}
 groupcastt = "[ ONLINE ]"
 
 # Post Request
@@ -104,11 +104,12 @@ def handle_message(event):
                 line_bot_api.push_message(gid, TextSendMessage(text="[ ประกาศ ]\n"+groupcastt))
                 groupcast[gid] = False
             elif groupcast[gid] == False:
-                groupcast[gid] = False
+                line_bot_api.push_message(gid, TextSendMessage(text="Error"))
             else:
-                groupcast[gid] = True
+                line_bot_api.push_message(gid, TextSendMessage(text="[ ประกาศ ]\n"+groupcastt))
+                groupcast[gid] = False
     except Exception as Error:
-        line_bot_api.push_message(gid, TextSendMessage(text=Error + "\nกรุณาติดต่อแอดมิน"))
+        line_bot_api.push_message(gid, TextSendMessage(text=Error))
     if text.isdigit():
         b = int(text)
         reverse = 0
