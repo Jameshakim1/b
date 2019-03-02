@@ -1,7 +1,7 @@
 #import matplotlib
 #matplotlib.use('Agg')
 #import matplotlib.pyplot as plt
-import quandl
+#import quandl
 from flask import Flask, request, abort
 from bs4 import BeautifulSoup
 import wikipedia
